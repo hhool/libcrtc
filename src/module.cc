@@ -43,7 +43,7 @@
 #include "rtc_base/win32_socket_server.h"
 namespace crtc {
 std::unique_ptr<rtc::WinsockInitializer> g_winsock_init_;
-std::unique_ptr<rtc::AutoThread> g_auto_thread_;
+std::unique_ptr<rtc::Thread> g_auto_thread_;
 }
 #endif
 
@@ -59,7 +59,8 @@ void Module::Init() {
   crtc::g_winsock_init_.reset(new rtc::WinsockInitializer());
 #endif
 
-  crtc::g_auto_thread_.reset(new rtc::AutoThread());
+  crtc::g_auto_thread_.reset(rtc::Thread::CreateWithSocketServer().release());
+  rtc::ThreadManager::Instance()->SetCurrentThread(crtc::g_auto_thread_.get());
   //rtc::ThreadManager::Instance()->WrapCurrentThread();
   // webrtc::Trace::CreateTrace();
   // rtc::LogMessage::LogToDebug(rtc::LS_ERROR);
@@ -74,6 +75,7 @@ void Module::Dispose() {
   RTCPeerConnectionInternal::Dispose();
   AsyncInternal::Dispose();
   rtc::CleanupSSL();
+  rtc::ThreadManager::Instance()->SetCurrentThread(nullptr);
   crtc::g_auto_thread_.reset();
 #ifdef CRTC_OS_WIN
   crtc::g_winsock_init_.reset();

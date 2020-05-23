@@ -16,29 +16,30 @@ int main() {
   //_CrtSetBreakAlloc(2656);
 #endif
   Module::Init();
-  
+
   printf("Creating Workers...\n");
-  std::vector<Let<Worker>> workers;
-  for (int index = 0; index < requested; index++) {
-    Let<Worker> worker =  Worker::New([index]() {
-      SetTimeout([=]() {
-        if (!Worker::This().IsEmpty()) {
-          printf("I'M WORKER[%d]!\n", index);
-          total++;
-        } else {
-          printf("I'M NOT WORKER[%d]!\n", index);
-        }
-      }, 6000);
-    });
-  }
+  Let<Worker> worker =  Worker::New([&]() {
+    SetTimeout(
+        [=]() {
+          if (!Worker::This().IsEmpty()) {
+            printf("I'M WORKER!\n");
+            total++;
+          } else {
+            printf("I'M NOT WORKER!\n");
+          }
+        },
+        6000);
+  });
 
   printf("All Workers are now created. Idling for 30 seconds...\n");
 
   Module::DispatchEvents(true);
+  worker.Dispose();
   Module::Dispose();
 
   if (total != requested) {
-    printf("Test Failed: current count: %d, requested count: %d\n", total, requested);
+    printf("Test Failed: current count: %d, requested count: %d\n", total,
+           requested);
   } else {
     printf("All %d workers created!\n", total);
   }

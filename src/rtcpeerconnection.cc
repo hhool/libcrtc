@@ -45,7 +45,7 @@ RTCPeerConnection::RTCIceServers RTCPeerConnection::defaultIceServers;
 
 void RTCPeerConnectionInternal::Init() {
   
-  s_worker_thread = rtc::Thread::Create();
+  s_worker_thread = rtc::Thread::CreateWithSocketServer();
   s_worker_thread->SetName("worker", nullptr);
   if (!s_worker_thread->Start()) {
   }

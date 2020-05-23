@@ -219,6 +219,8 @@ int main() {
   }, 10000);
 
   Module::DispatchEvents(true);
+
+  dataChannel.Dispose();
   Module::Dispose();
 
   return 0;

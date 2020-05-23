@@ -34,7 +34,7 @@ thread_local Let<WorkerInternal> WorkerInternal::current_worker;
 
 bool WorkerInternal::Wait(int cms, bool process_io) {
   if (RefCount() > 1) {
-    return rtc::NullSocketServer::Wait(1000, process_io);
+    return rtc::NullSocketServer::Wait(100, process_io);
   }
 
   return false;
@@ -43,15 +43,19 @@ bool WorkerInternal::Wait(int cms, bool process_io) {
 void WorkerInternal::Run() {
   WorkerInternal::current_worker = this;
   ProcessMessages(rtc::ThreadManager::kForever);
+  join_thread_ = false;
   WorkerInternal::current_worker.Dispose();
 }
 
-WorkerInternal::WorkerInternal() : rtc::NullSocketServer(), rtc::Thread(this) {
+WorkerInternal::WorkerInternal()
+    : rtc::NullSocketServer(), rtc::Thread(this), join_thread_(true) {
   SetName("worker", this);
 }
 
 WorkerInternal::~WorkerInternal() {
-  rtc::Thread::Stop();
+  if (!join_thread_) {
+    UnwrapCurrent();
+  }
 }
 
 Let<Worker> Worker::New(const Callback& runnable) {

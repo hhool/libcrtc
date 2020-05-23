@@ -50,6 +50,9 @@ class WorkerInternal : public Worker,
 
   bool Wait(int cms, bool process_io) final;
   void Run() override;
+
+ private:
+  bool join_thread_;
 };
 
 class RealTimeClockInternal : public RealTimeClock {
