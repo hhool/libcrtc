@@ -2,7 +2,7 @@
 #include <string>
 #include <utility>
 
-#include <crtc.h>
+#include <rc_crtc.h>
 
 using namespace crtc;
 

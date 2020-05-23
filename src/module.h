@@ -27,7 +27,7 @@
 #ifndef CRTC_MODULE_H
 #define CRTC_MODULE_H
 
-#include "crtc.h"
+#include "rc_crtc.h"
 
 namespace crtc {
   class ModuleInternal {

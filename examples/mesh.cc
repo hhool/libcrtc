@@ -3,7 +3,7 @@
 #include <map>
 #include <iostream>
 
-#include "crtc.h"
+#include "rc_crtc.h"
 
 using namespace crtc;
 

@@ -2,11 +2,18 @@
 #include <string>
 #include <utility>
 
-#include "crtc.h"
+#include "rc_crtc.h"
 
 using namespace crtc;
 
 int main() {
+#if defined(_DEBUG) && defined(_MSC_VER) && defined(WIN32) 
+  int Flag =
+      _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+  Flag |= _CRTDBG_LEAK_CHECK_DF;
+  _CrtSetDbgFlag(Flag);
+  //_CrtSetBreakAlloc(2656);
+#endif
   Module::Init();
 
   Promise<std::string>::New([](const Promise<std::string>::FullFilledCallback &resolve, const Promise<std::string>::RejectedCallback &reject) {

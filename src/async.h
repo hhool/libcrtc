@@ -27,7 +27,7 @@
 #ifndef CRTC_ASYNC_H
 #define CRTC_ASYNC_H
 
-#include "crtc.h"
+#include "rc_crtc.h"
 
 namespace crtc {
   class AsyncInternal {

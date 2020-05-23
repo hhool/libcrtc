@@ -27,16 +27,16 @@
 #ifndef CRTC_MEDIADEVICES_H
 #define CRTC_MEDIADEVICES_H
 
-#include "crtc.h"
+#include "rc_crtc.h"
 #include "mediastream.h"
 #include "mediastreamtrack.h"
 
-#include "webrtc/api/peerconnectioninterface.h"
-#include "webrtc/modules/audio_device/include/audio_device.h"
-#include "webrtc/media/engine/webrtcvideocapturerfactory.h"
-#include "webrtc/modules/video_capture/video_capture_factory.h"
+#include "api/peer_connection_interface.h"
+#include "modules/audio_device/include/audio_device.h"
+#include "media/engine/webrtcvideocapturerfactory.h"
+#include "modules/video_capture/video_capture_factory.h"
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/LongRange
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/LongRange
 
 /*
 typedef struct {
@@ -45,7 +45,7 @@ typedef struct {
 } LongRange;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/ConstrainLong
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/ConstrainLong
 
 /*
 typedef struct : LongRange {
@@ -54,7 +54,7 @@ typedef struct : LongRange {
 } ConstrainLong;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/ConstrainBoolean
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/ConstrainBoolean
 
 /*
 typedef struct {
@@ -63,7 +63,7 @@ typedef struct {
 } ConstrainBoolean;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/DoubleRange
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/DoubleRange
 
 /*
 typedef struct {
@@ -72,7 +72,7 @@ typedef struct {
 } DoubleRange;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/ConstrainDouble
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/ConstrainDouble
 
 /*
 typedef struct : DoubleRange {
@@ -81,7 +81,7 @@ typedef struct : DoubleRange {
 } ConstrainDouble;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/ConstrainDOMString
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/ConstrainDOMString
 
 /*
 typedef struct {
@@ -90,7 +90,7 @@ typedef struct {
 } ConstrainString;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints
 
 /*
 typedef struct {
@@ -110,7 +110,7 @@ typedef struct {
 } MediaTrackConstraints;
 */
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackSettings
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackSettings
 
 /*
 typedef struct {
@@ -140,7 +140,7 @@ typedef struct {
   FacingMode facingMode;
 } MediaTrackSettings;
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaDeviceInfo
 
 typedef struct {
   enum Kind {
@@ -157,7 +157,7 @@ typedef struct {
 
 typedef std::vector<MediaDeviceInfo> MediaDeviceInfos;
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints
 
 typedef struct {
   bool enableVideo;
@@ -170,19 +170,19 @@ typedef struct {
   //MediaTrackConstraints audio;
 } MediaStreamConstraints;
 
-/// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices
+//TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices
 
 class CRTC_EXPORT MediaDevices {
   public:
-    /// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/enumerateDevices
+    //TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/enumerateDevices
 
     static Let<Promise<MediaDeviceInfos>> EnumerateDevices();
 
-    /// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getSupportedConstraints
+    //TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getSupportedConstraints
 
     // static Let<Promise<void>> GetSupportedConstraints();
 
-    /// \sa https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+    //TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 
     static Let<Promise<Let<MediaStream>>> GetUserMedia();
     static Let<Promise<Let<MediaStream>>> GetUserMedia(const MediaStreamConstraints &constraints);

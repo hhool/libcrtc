@@ -2,17 +2,23 @@
 #include <string>
 #include <utility>
 
-#include "crtc.h"
+#include "rc_crtc.h"
 
 using namespace crtc;
 
-static int total = 0, requested = 100;
+static int total = 0, requested = 1;
 
 int main() {
+#if defined(_DEBUG) && defined(_MSC_VER) && defined(WIN32)
+  int Flag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+  Flag |= _CRTDBG_LEAK_CHECK_DF;
+  _CrtSetDbgFlag(Flag);
+  //_CrtSetBreakAlloc(2656);
+#endif
   Module::Init();
   
   printf("Creating Workers...\n");
-
+  std::vector<Let<Worker>> workers;
   for (int index = 0; index < requested; index++) {
     Let<Worker> worker =  Worker::New([index]() {
       SetTimeout([=]() {
@@ -22,7 +28,7 @@ int main() {
         } else {
           printf("I'M NOT WORKER[%d]!\n", index);
         }
-      }, 30000);
+      }, 6000);
     });
   }
 

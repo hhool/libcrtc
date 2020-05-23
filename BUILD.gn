@@ -1,71 +1,152 @@
-declare_args() {
-  build_with_chromium = false
+import("//webrtc.gni")
+
+if (is_android) {
+  import("//build/config/android/config.gni")
+  import("//build/config/android/rules.gni")
+} else if (is_mac) {
+  import("//build/config/mac/rules.gni")
+} else if (is_ios) {
+  import("//build/config/ios/rules.gni")
 }
 
-import("//webrtc/webrtc.gni")
-
-rtc_shared_library("crtc") {
-  libs = []
+config("crtc_config") {
+  include_dirs = []
   defines = []
-
-  sources = [
-    "src/atomic.cc",
-    "src/event.cc",
-    "src/error.cc",
-    "src/arraybuffer.cc",
-    "src/worker.cc",
-    "src/async.cc",
-    "src/module.cc",
-    "src/rtcpeerconnection.cc",
-    "src/rtcdatachannel.cc",
-    "src/mediastream.cc",
-    "src/mediastreamtrack.cc",
-    "src/audiosink.cc",
-    "src/videosource.cc",
-    "src/videosink.cc",
-    "src/imagebuffer.cc",
-    "src/time.cc",
-    "src/audiobuffer.cc",
-    "src/audiosource.cc",
-  ]
-
   if (is_win) {
     defines += [
       "CRTC_OS_WIN"
+    ]
+  } else if (is_mac) {
+    defines += [
+      "CRTC_OS_OSX"
+    ]
+  } else if (is_ios) {
+    defines += [
+      "CRTC_OS_IOS"
     ]
   } else {
     defines += [
       "CRTC_OS_POSIX"
     ]
   }
+}
 
-  if (is_mac) {
+rtc_source_set("event_timer_wrapper") {
+  visibility = [ "*" ]
+  defines = []
+  sources = [
+    "src/base/event_timer_wrapper.cc",
+    "src/base/event_timer_wrapper.h",
+  ]
+  deps = [
+    "//rtc_base:rtc_base",
+  ]
+  if (is_win) {
+    defines += [
+      "CRTC_OS_WIN"
+    ]
+    sources += [
+      "src/base/event_timer_win.cc",
+      "src/base/event_timer_win.h",
+    ]
+  } 
+  else if (is_mac) {
     defines += [
       "CRTC_OS_OSX"
     ]
+    sources += [
+      "src/base/event_timer_posix.cc",
+      "src/base/event_timer_posix.h",
+    ]
   }
+  else if (is_ios) {
+    defines += [
+      "CRTC_OS_IOS"
+    ]
+    sources += [
+      "src/base/event_timer_posix.cc",
+      "src/base/event_timer_posix.h",
+    ]
+  }
+  else {
+    defines += [
+      "CRTC_OS_POSIX"
+    ]
+    sources += [
+      "src/base/event_timer_posix.cc",
+      "src/base/event_timer_posix.h",
+    ]
+  }
+  
+}
 
-  cflags = [
-    "-fexceptions",
-  ]
-
-  cflags_cc = [
-    "-fexceptions",
+rtc_shared_library("crtc") {
+  libs = []
+  defines = []
+  cflags = []
+  cflags_cc = []
+  sources = [
+    "src/arraybuffer.cc",
+    "src/async.cc",
+    "src/atomic.cc",
+    "src/audiobuffer.cc",
+    "src/audiosink.cc",
+    "src/audiosource.cc",
+    "src/event.cc",
+    "src/error.cc",
+    "src/imagebuffer.cc",
+    "src/module.cc",
+    "src/mediastream.cc",
+    "src/mediastreamtrack.cc",
+    "src/rtcpeerconnection.cc",
+    "src/rtcdatachannel.cc",
+    "src/time.cc",
+    #"src/videosource.cc",
+    "src/videosink.cc",
+    "src/worker.cc",
   ]
 
   deps = [
+    "//rtc_base:rtc_base",
+    "//api:audio_options_api",
+    "//api:create_peerconnection_factory",
+    "//api:libjingle_peerconnection_api",
+    "//api:scoped_refptr",
+    "//api/audio:audio_mixer_api",
+    "//api/audio_codecs:audio_codecs_api",
+    "//api/video:video_frame_i420",
+    "//api/video_codecs:video_codecs_api",
+    "//media:rtc_media_base",
+    "//api/audio_codecs:builtin_audio_decoder_factory",
+    "//api/audio_codecs:builtin_audio_encoder_factory",
+    "//api/video:video_frame",
+    "//api/video_codecs:builtin_video_decoder_factory",
+    "//api/video_codecs:builtin_video_encoder_factory",
+    "//media:rtc_audio_video",
+    "//modules/audio_device:audio_device",
+    "//modules/audio_processing:api",
+    "//modules/audio_processing:audio_processing",
+    "//modules/video_capture:video_capture_module",
+    "//pc:libjingle_peerconnection",
+    "//pc:peerconnection",
+    "//p2p:rtc_p2p",
+    "//rtc_base:checks",
+    "//rtc_base/third_party/sigslot",
     "//third_party/libyuv",
-    "//webrtc/pc:libjingle_peerconnection",
-    "//webrtc/system_wrappers:field_trial_default",
-    "//webrtc/system_wrappers:metrics_default",
+    "//api:libjingle_peerconnection_api",
+    "//system_wrappers:field_trial",
+    "//third_party/abseil-cpp/absl/memory",
+    "//third_party/abseil-cpp/absl/types:optional",
+    ":event_timer_wrapper",
   ]
+  configs += [ ":crtc_config" ]
+  public_configs = [ ":crtc_config" ]
 
   if (!build_with_chromium && is_clang) {
     suppressed_configs += [ "//build/config/clang:find_bad_constructs" ]
   }
 
   include_dirs = [
-    "src/protobuf",
     "include",
   ]
 }

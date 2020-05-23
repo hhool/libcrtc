@@ -23,15 +23,15 @@
 *
 */
 
-#include "crtc.h"
+#include "rc_crtc.h"
 #include "module.h"
 
-#include "webrtc/base/atomicops.h"
+#include "rtc_base/atomic_ops.h"
 
 using namespace crtc;
 
-Let<Event> Event::New() {
-  return Let<Event>::New();
+crtc::Let<crtc::Event> Event::New() {
+  return crtc::Let<crtc::Event>::New();
 }
 
 Event::Event() {

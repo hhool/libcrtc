@@ -23,7 +23,7 @@
 *
 */
 
-#include "crtc.h"
+#include "rc_crtc.h"
 #include "mediadevices.h"
 #include <string> 
 
