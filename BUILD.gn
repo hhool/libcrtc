@@ -31,7 +31,7 @@ config("crtc_config") {
   }
 }
 
-rtc_source_set("event_timer_wrapper") {
+rtc_source_set("base_event_timer_wrapper") {
   visibility = [ "*" ]
   defines = []
   sources = [
@@ -137,7 +137,7 @@ rtc_shared_library("crtc") {
     "//system_wrappers:field_trial",
     "//third_party/abseil-cpp/absl/memory",
     "//third_party/abseil-cpp/absl/types:optional",
-    ":event_timer_wrapper",
+    ":base_event_timer_wrapper",
   ]
   configs += [ ":crtc_config" ]
   public_configs = [ ":crtc_config" ]
