@@ -73,8 +73,7 @@ class MediaStream : virtual public Reference {
   virtual void AddTrack(const Let<MediaStreamTrack>& track) = 0;
   virtual void RemoveTrack(const Let<MediaStreamTrack>& track) = 0;
 
-  /// \sa
-  /// https://developer.mozilla.org/en-US/docs/Web/API/MediaStream/getTrackById
+  //TODO(hhool): https://developer.mozilla.org/en-US/docs/Web/API/MediaStream/getTrackById
 
   virtual Let<MediaStreamTrack> GetTrackById(const std::string& id) const = 0;
 

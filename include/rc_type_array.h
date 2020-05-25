@@ -13,8 +13,7 @@
 #include "rc_common.h"
 namespace crtc {
 
-/// \sa
-/// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
+//TODO(hhool): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
 template <typename T>
 class CRTC_EXPORT TypedArray {

@@ -33,7 +33,7 @@
 #include "api/audio_codecs/builtin_audio_decoder_factory.h"
 #include "api/audio_codecs/builtin_audio_encoder_factory.h"
 
-using namespace crtc;
+namespace crtc {
 
 std::unique_ptr<rtc::Thread> RTCPeerConnectionInternal::s_worker_thread;
 rtc::scoped_refptr<webrtc::AudioDeviceModule>
@@ -587,3 +587,4 @@ RTCPeerConnection::RTCConfiguration::~RTCConfiguration() {}
 RTCPeerConnection::RTCPeerConnection() {}
 
 RTCPeerConnection::~RTCPeerConnection() {}
+}

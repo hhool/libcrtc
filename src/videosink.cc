@@ -27,7 +27,7 @@
 #include "videosink.h"
 #include "imagebuffer.h"
 
-using namespace crtc;
+namespace crtc {
 
 VideoSinkInternal::VideoSinkInternal(
     const Let<MediaStreamTrackInternal>& track,
@@ -113,3 +113,4 @@ void VideoSinkInternal::OnEnded() {
 VideoSink::VideoSink() {}
 
 VideoSink::~VideoSink() {}
+}

@@ -28,8 +28,7 @@
 
 #include "arraybuffer.h"
 
-using namespace crtc;
-
+namespace crtc {
 Let<ArrayBuffer> ArrayBuffer::New(const std::string& data) {
   return Let<ArrayBufferInternal>::New(
       reinterpret_cast<const uint8_t*>(data.data()), data.size());
@@ -98,4 +97,5 @@ const uint8_t* ArrayBufferInternal::Data() const {
 
 std::string ArrayBufferInternal::ToString() const {
   return std::string(reinterpret_cast<const char*>(_data), _byteLength);
+}
 }

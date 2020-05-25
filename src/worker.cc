@@ -28,7 +28,7 @@
 
 #include "rtc_base/time_utils.h"
 
-using namespace crtc;
+namespace crtc {
 
 thread_local Let<WorkerInternal> WorkerInternal::current_worker;
 
@@ -115,4 +115,5 @@ void RealTimeClockInternal::Stop() {
 
 Let<RealTimeClock> RealTimeClock::New(const Callback& runnable) {
   return Let<RealTimeClockInternal>::New(runnable);
+}
 }

@@ -29,7 +29,7 @@
 #include "rtcpeerconnection.h"
 #include "sdk/media_constraints.h"
 
-using namespace crtc;
+namespace crtc {
 
 volatile int VideoSourceInternal::counter;
 
@@ -199,3 +199,4 @@ void VideoSourceInternal::OnDrain() {
 VideoSource::VideoSource() {}
 
 VideoSource::~VideoSource() {}
+}

@@ -27,7 +27,7 @@
 #include "rc_crtc.h"
 #include "audiosource.h"
 
-using namespace crtc;
+namespace crtc {
 
 AudioSourceInternal::AudioSourceInternal() {
   _audio->Drain.connect(this, &AudioSourceInternal::OnDrain);
@@ -91,3 +91,4 @@ Let<AudioSource> AudioSource::New() {
 AudioSource::AudioSource() {}
 
 AudioSource::~AudioSource() {}
+}

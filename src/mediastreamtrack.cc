@@ -26,7 +26,7 @@
 #include "mediastreamtrack.h"
 #include "rc_crtc.h"
 
-using namespace crtc;
+namespace crtc {
 
 void MediaStreamTrackInternal::OnChanged() {
   switch (_source->state()) {
@@ -153,3 +153,4 @@ MediaStreamTrackInternal::GetSource() const {
 MediaStreamTrack::MediaStreamTrack() {}
 
 MediaStreamTrack::~MediaStreamTrack() {}
+}

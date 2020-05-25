@@ -47,7 +47,7 @@ std::unique_ptr<rtc::Thread> g_auto_thread_;
 }
 #endif
 
-using namespace crtc;
+namespace crtc {
 
 volatile int ModuleInternal::pending_events = 0;
 void Module::Init() {
@@ -59,9 +59,9 @@ void Module::Init() {
   crtc::g_winsock_init_.reset(new rtc::WinsockInitializer());
 #endif
 
-  crtc::g_auto_thread_.reset(rtc::Thread::CreateWithSocketServer().release());
-  rtc::ThreadManager::Instance()->SetCurrentThread(crtc::g_auto_thread_.get());
-  //rtc::ThreadManager::Instance()->WrapCurrentThread();
+  //crtc::g_auto_thread_.reset(rtc::Thread::CreateWithSocketServer().release());
+  //rtc::ThreadManager::Instance()->SetCurrentThread(crtc::g_auto_thread_.get());
+  rtc::ThreadManager::Instance()->WrapCurrentThread();
   // webrtc::Trace::CreateTrace();
   // rtc::LogMessage::LogToDebug(rtc::LS_ERROR);
 
@@ -75,7 +75,8 @@ void Module::Dispose() {
   RTCPeerConnectionInternal::Dispose();
   AsyncInternal::Dispose();
   rtc::CleanupSSL();
-  rtc::ThreadManager::Instance()->SetCurrentThread(nullptr);
+  //rtc::ThreadManager::Instance()->SetCurrentThread(nullptr);
+  rtc::ThreadManager::Instance()->UnwrapCurrentThread();
   crtc::g_auto_thread_.reset();
 #ifdef CRTC_OS_WIN
   crtc::g_winsock_init_.reset();
@@ -92,4 +93,6 @@ bool Module::DispatchEvents(bool kForever) {
   } while (kForever && result);
 
   return result;
+}
+
 }

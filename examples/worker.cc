@@ -13,7 +13,7 @@ int main() {
   int Flag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
   Flag |= _CRTDBG_LEAK_CHECK_DF;
   _CrtSetDbgFlag(Flag);
-  //_CrtSetBreakAlloc(2656);
+  //_CrtSetBreakAlloc(154);
 #endif
   Module::Init();
 
@@ -31,7 +31,7 @@ int main() {
         6000);
   });
 
-  printf("All Workers are now created. Idling for 30 seconds...\n");
+  printf("All Workers are now created. Idling for 10 seconds...\n");
 
   Module::DispatchEvents(true);
   worker.Dispose();

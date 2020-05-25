@@ -26,7 +26,7 @@
 #include "rc_crtc.h"
 #include "mediastream.h"
 
-using namespace crtc;
+namespace crtc {
 
 webrtc::MediaStreamInterface* MediaStreamInternal::New(
     const Let<MediaStream>& stream) {
@@ -203,3 +203,4 @@ void MediaStreamInternal::OnChanged() {
 MediaStream::MediaStream() {}
 
 MediaStream::~MediaStream() {}
+}

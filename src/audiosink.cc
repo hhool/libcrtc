@@ -26,7 +26,7 @@
 #include "rc_crtc.h"
 #include "audiosink.h"
 
-using namespace crtc;
+namespace crtc {
 
 AudioSinkInternal::AudioSinkInternal(
     const Let<MediaStreamTrackInternal>& track,
@@ -114,3 +114,4 @@ void AudioSinkInternal::OnData(const void* audio_data,
 AudioSink::AudioSink() {}
 
 AudioSink::~AudioSink() {}
+}

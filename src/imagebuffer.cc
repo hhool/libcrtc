@@ -27,7 +27,7 @@
 #include "imagebuffer.h"
 #include "rtc_base/ref_count.h"
 
-using namespace crtc;
+namespace crtc {
 
 ImageBufferInternal::ImageBufferInternal(const Let<ArrayBuffer>& buffer,
                                          int width,
@@ -295,4 +295,6 @@ int WrapBufferToVideoFrameBuffer::width() const {
 
 int WrapBufferToVideoFrameBuffer::height() const {
   return _height;
+}
+
 }

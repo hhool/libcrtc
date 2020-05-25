@@ -28,7 +28,7 @@
 
 #include "rtc_base/atomic_ops.h"
 
-using namespace crtc;
+namespace crtc {
 
 crtc::Let<crtc::Event> Event::New() {
   return crtc::Let<crtc::Event>::New();
@@ -40,4 +40,6 @@ Event::Event() {
 
 Event::~Event() {
   rtc::AtomicOps::Decrement(&ModuleInternal::pending_events);
+}
+
 }

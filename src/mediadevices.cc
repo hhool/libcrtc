@@ -27,7 +27,7 @@
 #include "mediadevices.h"
 #include <string> 
 
-using namespace crtc;
+namespace crtc {
 
 std::unique_ptr<rtc::Thread> MediaDevicesInternal::network_thread;
 std::unique_ptr<rtc::Thread> MediaDevicesInternal::worker_thread;
@@ -227,4 +227,5 @@ Let<Promise<Let<MediaStream>>> MediaDevices::GetUserMedia() {
   constraints.enableVideo = true;
 
   return MediaDevices::GetUserMedia(constraints);
+}
 }

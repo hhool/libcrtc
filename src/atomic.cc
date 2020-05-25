@@ -11,7 +11,7 @@
 #include "rc_atomic.h"
 #include "rtc_base/atomic_ops.h"
 
-using namespace crtc;
+namespace crtc {
 
 int Atomic::Increment(volatile int *arg) {
   return rtc::AtomicOps::Increment(arg);
@@ -23,4 +23,5 @@ int Atomic::Decrement(volatile int *arg) {
 
 int Atomic::AcquireLoad(volatile int *arg) {
   return rtc::AtomicOps::AcquireLoad(arg);
+}
 }

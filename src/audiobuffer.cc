@@ -27,8 +27,7 @@
 #include "rc_crtc.h"
 #include "audiobuffer.h"
 
-
-using namespace crtc;
+namespace crtc {
 
 AudioBufferInternal::AudioBufferInternal(const Let<ArrayBuffer>& buffer,
                                          int channels,
@@ -95,4 +94,6 @@ Let<AudioBuffer> AudioBuffer::New(const Let<ArrayBuffer>& buffer,
                                   int frames) {
   return Let<AudioBufferInternal>::New(buffer, channels, sampleRate,
                                        bitsPerSample, frames);
+}
+
 }

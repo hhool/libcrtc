@@ -26,7 +26,7 @@
 #include "error.h"
 #include "rc_crtc.h"
 
-using namespace crtc;
+namespace crtc {
 
 ErrorInternal::ErrorInternal(const std::string& message,
                              const std::string& fileName,
@@ -55,4 +55,6 @@ int ErrorInternal::LineNumber() const {
 
 std::string ErrorInternal::ToString() const {
   return _name + ": " + _message;
+}
+
 }

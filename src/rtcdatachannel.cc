@@ -27,7 +27,7 @@
 #include "arraybuffer.h"
 #include "rc_crtc.h"
 
-using namespace crtc;
+namespace crtc {
 
 RTCDataChannelInternal::RTCDataChannelInternal(
     const rtc::scoped_refptr<webrtc::DataChannelInterface>& channel)
@@ -186,3 +186,4 @@ std::string WrapRtcBuffer::ToString() const {
 RTCDataChannel::RTCDataChannel() {}
 
 RTCDataChannel::~RTCDataChannel() {}
+}
