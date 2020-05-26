@@ -50,7 +50,7 @@ void MediaDevicesInternal::Init() {
     
   }
 
-  audio_device = webrtc::AudioDeviceModule::Create(0, webrtc::AudioDeviceModule::kPlatformDefaultAudio);
+  audio_device = webrtc::AudioDeviceModule::Create(webrtc::AudioDeviceModule::kPlatformDefaultAudio);
 
   if (!audio_device.get()) {
     // TODO(): Handle Error!
@@ -68,7 +68,7 @@ void MediaDevicesInternal::Init() {
     audio_device->InitRecording();
   }
 
-  video_device.reset(webrtc::VideoCaptureFactory::CreateDeviceInfo(0));
+  video_device.reset(webrtc::VideoCaptureFactory::CreateDeviceInfo());
 
   if (!video_device) {
     // TODO(): Handle Error!

@@ -95,7 +95,6 @@ rtc_shared_library("crtc") {
     "src/event.cc",
     "src/error.cc",
     "src/imagebuffer.cc",
-    "src/mediadevices.cc",
     "src/mediastream.cc",
     "src/mediastreamtrack.cc",
     "src/module.cc",

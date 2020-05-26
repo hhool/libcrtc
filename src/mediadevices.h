@@ -33,9 +33,9 @@
 
 #include "api/peer_connection_interface.h"
 #include "modules/audio_device/include/audio_device.h"
-#include "media/engine/webrtcvideocapturerfactory.h"
 #include "modules/video_capture/video_capture_factory.h"
 
+namespace crtc {
 //TODO(hhool):https://developer.mozilla.org/en-US/docs/Web/API/LongRange
 
 /*
@@ -200,5 +200,5 @@ class MediaDevicesInternal {
     static std::unique_ptr<webrtc::VideoCaptureModule::DeviceInfo> video_device;
     
 };
-
+}
 #endif
